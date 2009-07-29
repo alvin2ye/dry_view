@@ -1,0 +1,33 @@
+<h1 class='heading'>
+  <%= resource_class.human_name -%>
+</h1> 
+<p class='actions'> 
+  <%= link_to "新建#{resource_class.human_name}", new_resource_url %>
+</p> 
+<table> 
+  <thead class='header'> 
+    <tr> 
+      <%- list_columns.each do |c| -%>
+      <th><%= resource_class.human_attribute_name(c.name) -%></th>
+      <%- end -%>
+      <th class='actions'>Actions</th> 
+    </tr> 
+  </thead> 
+  <tbody class='items topics'> 
+    <% collection.each do |i| %>
+      <tr class="<%= cycle("odd", "even") %> <%=h i.class.name -%>" id="<%=h "#{i.class.name}-#{i.id}" -%>">
+        <%- list_columns.each do |c| -%>
+        <td class="<%= c.name -%>"><%=h i.send(c.name) %></td>
+        <%- end -%>
+
+        <td class="actions">
+           <%= link_to "查看", resource_url(i) %>
+           |
+           <%= link_to "编辑", edit_resource_url(i) %>
+           |
+           <%= link_to "删除", resource_url(i), :method => :delete, :confirm => "确认删除吗?" %> 
+        </td>
+      </tr>
+    <% end %>
+  </tbody> 
+</table> 

@@ -1,0 +1,20 @@
+<% form_for resource, :html => {:class => "formtastic"} do |f| %>
+  <%= f.error_messages %>
+  <fieldset class="inputs">
+    <ol>
+      <%- form_columns.each do |c| -%>
+      <li class="required">
+        <%= f.label c.name, resource_class.human_attribute_name(c.name) %><abbr title="required">*</abbr>
+        <%= f.text_field c.name %>
+      </li>
+      <%- end -%>
+    </ol>
+  </fieldset> 
+  <fieldset class="buttons">
+    <ol>
+      <li class="commit">
+        <%= f.submit "提交" %>
+      </li> 
+    </ol>
+  </fieldset>
+<% end %>

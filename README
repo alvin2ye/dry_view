@@ -1,0 +1,24 @@
+Example:
+  说明:
+  将常用的View公用, 统一了I18n 
+
+  # Controller
+  class BlogController < InheritedResources::Base
+    dry_view
+  end
+
+	# Model
+  class Blog
+	  def label
+		  self.title
+		end
+  end
+
+# 依赖
+  此功能依赖 inherited_resources( http://github.com/josevalim/inherited_resources/tree/master )
+	可以用以下命令安装
+	script/plugin install git://github.com/josevalim/inherited_resources.git
+
+	其中 form 的布局和 Css 来自 formtastic (http://github.com/justinfrench/formtastic/tree/master)
+
+Copyright (c) 2009 Alvin Ye, released under the MIT license   

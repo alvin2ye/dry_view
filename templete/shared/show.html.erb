@@ -1,0 +1,16 @@
+<h1 class='heading'> 
+  查看 <%= resource_class.human_name -%> <%= resource.label %>
+</h1>
+
+<dl class="<%=h resource_class.name %>" id="<%=h "#{resource_class.name}-#{resource.id}" -%>">
+  <%- show_columns.each do |c| -%>
+  <dt class='label'><%= resource_class.human_attribute_name(c.name) %></dt> 
+  <dd class='<%=h c.name -%>'><%=h resource.send(c.name) %></dd> 
+  <%- end -%>
+</dl>
+
+<p class='actions'> 
+  <%= link_to "编辑", edit_resource_url %>
+  |
+  <%= link_to "返回列表", collection_url %>
+</p> 
