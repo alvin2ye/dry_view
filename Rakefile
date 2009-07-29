@@ -5,7 +5,7 @@ require 'rake/rdoctask'
 desc 'Default: run unit tests.' 
 task :default => :test 
  
-desc 'Test auto_complete plugin.' 
+desc 'Test plugin.' 
 Rake::TestTask.new(:test) do |t| 
   t.libs << 'lib' 
   t.pattern = 'test/**/*_test.rb' 
