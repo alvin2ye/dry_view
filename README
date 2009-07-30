@@ -46,5 +46,20 @@ Example:
 	7	 rake dry_view:install
 	8  add to layout: <%= stylesheet_link_tag "formtastic" %>
 
+# I18n
+  # config/locales/zh.yml
+	zh:
+		dry_view:
+			actions: "操作"
+			view: "查看"
+			edit: "编辑"
+			remove: "删除"
+			new: "新建"
+			submit: "提交"
+			required: "必填"
+			cancel: "取消"
+			return_index: "返回列表"
+			are_you_sure: "你确认吗?" 
+
 Copyright (c) 2009 Alvin Ye at Agideo, released under the MIT license   
 alvin.ye.cn(*)gmail.com
