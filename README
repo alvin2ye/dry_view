@@ -21,4 +21,28 @@ Example:
 
 	其中 form 的布局和 Css 来自 formtastic (http://github.com/justinfrench/formtastic/tree/master)
 
-Copyright (c) 2009 Alvin Ye, released under the MIT license   
+# Useage
+  1  ./script/plugin install git://github.com/alvin2ye/dry_view.git
+	2  ./script/plugin install git://github.com/josevalim/inherited_resources.git
+	3  ./script/generate Model Company name:string addr:string
+	4  rake db:migrate
+	5  ruby script/generate controller companies
+	6  
+		 # app/controllers/companies_controller.rb
+		 class CompaniesController < InheritedResources::Base
+		 	dry_view
+		 end
+
+		 #  app/models/company.rb
+		 class Company < ActiveRecord::Base
+		   def label
+		 		self.name
+		 	end
+		 end
+
+		 # config/routes.rb
+		 map.resources :companies
+
+	7	 rake dry_view:install
+
+Copyright (c) 2009 Alvin Ye at Agideo, released under the MIT license   
