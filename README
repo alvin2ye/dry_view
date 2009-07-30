@@ -44,5 +44,6 @@ Example:
 		 map.resources :companies
 
 	7	 rake dry_view:install
+	8  add to layout: <%= stylesheet_link_tag "formtastic" %>
 
 Copyright (c) 2009 Alvin Ye at Agideo, released under the MIT license   
