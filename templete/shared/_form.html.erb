@@ -4,7 +4,8 @@
     <ol>
       <%- form_columns.each do |c| -%>
       <li class="required">
-        <%= f.label c.name, resource_class.human_attribute_name(c.name) %><abbr title="required">*</abbr>
+        <%= f.label c.name, resource_class.human_attribute_name(c.name) %>
+          <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
         <%= f.text_field c.name %>
       </li>
       <%- end -%>
@@ -13,7 +14,7 @@
   <fieldset class="buttons">
     <ol>
       <li class="commit">
-        <%= f.submit "提交" %>
+        <%= f.submit I18n.t('dry_view.submit', :default => "Submit") %>
       </li> 
     </ol>
   </fieldset>

@@ -2,7 +2,7 @@
   <%= resource_class.human_name -%>
 </h1> 
 <p class='actions'> 
-  <%= link_to "新建#{resource_class.human_name}", new_resource_url %>
+  <%= link_to "#{I18n.t('dry_view.new', :default => "New")}#{resource_class.human_name}", new_resource_url %>
 </p> 
 <table> 
   <thead class='header'> 
@@ -10,7 +10,7 @@
       <%- list_columns.each do |c| -%>
       <th><%= resource_class.human_attribute_name(c.name) -%></th>
       <%- end -%>
-      <th class='actions'>Actions</th> 
+      <th class='actions'><%=h I18n.t 'dry_view.actions', :default => "Actions" -%> </th> 
     </tr> 
   </thead> 
   <tbody class='items topics'> 
@@ -21,11 +21,11 @@
         <%- end -%>
 
         <td class="actions">
-           <%= link_to "查看", resource_url(i) %>
+           <%= link_to I18n.t('dry_view.view', :default => "View"), resource_url(i) %>
            |
-           <%= link_to "编辑", edit_resource_url(i) %>
+           <%= link_to I18n.t('dry_view.edit', :default => "Edit"), edit_resource_url(i) %>
            |
-           <%= link_to "删除", resource_url(i), :method => :delete, :confirm => "确认删除吗?" %> 
+           <%= link_to I18n.t('dry_view.remove', :default => "Remove"), resource_url(i), :method => :delete, :confirm => I18n.t('dry_view.are_you_sure', :default => "Are you sure?") %> 
         </td>
       </tr>
     <% end %>

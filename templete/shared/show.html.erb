@@ -1,5 +1,5 @@
 <h1 class='heading'> 
-  查看 <%= resource_class.human_name -%> <%= resource.label %>
+  <%=h "#{I18n.t('dry_view.view', :default => "View")} #{resource_class.human_name} #{resource.label}" -%>
 </h1>
 
 <dl class="<%=h resource_class.name %>" id="<%=h "#{resource_class.name}-#{resource.id}" -%>">
@@ -10,7 +10,7 @@
 </dl>
 
 <p class='actions'> 
-  <%= link_to "编辑", edit_resource_url %>
+  <%= link_to I18n.t('dry_view.edit', :default => "Edit"), edit_resource_url %>
   |
-  <%= link_to "返回列表", collection_url %>
+  <%= link_to I18n.t('dry_view.return_index', :default => "Index"), collection_url %>
 </p> 

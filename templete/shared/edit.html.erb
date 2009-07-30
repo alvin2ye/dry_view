@@ -1,7 +1,7 @@
 <h1 class='heading'> 
-  编辑 <%= resource_class.human_name -%> <%=h resource.label -%>
+  <%=h "#{I18n.t('dry_view.edit', :default => 'Edit')} #{resource_class.human_name} #{resource.label}" -%>
 </h1> 
 <%= render '/shared/form' %>
 <p class='actions'> 
-  <%= link_to "返回", collection_url %>
+  <%= link_to I18n.t('dry_view.cancel', :default => 'Cancel'), collection_url %>
 </p> 
