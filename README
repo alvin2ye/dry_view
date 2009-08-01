@@ -61,5 +61,12 @@ Example:
 			return_index: "返回列表"
 			are_you_sure: "你确认吗?" 
 
+# Config
+     
+		 class CompaniesController < InheritedResources::Base
+		   # Only display this columns, default is all columns except [:id, :created_at, :updated_at]
+			 dry_view :columns => [:name, :code]
+		 end
+
 Copyright (c) 2009 Alvin Ye at Agideo, released under the MIT license   
 alvin.ye.cn(*)gmail.com
