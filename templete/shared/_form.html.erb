@@ -2,7 +2,7 @@
   <%= f.error_messages %>
   <fieldset class="inputs">
     <ol>
-      <%- form_columns.each do |c| -%>
+      <%- @dry_view[:columns].each do |c| -%>
       <li class="required">
         <%= f.label c.name, resource_class.human_attribute_name(c.name) %>
           <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>

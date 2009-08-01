@@ -7,7 +7,7 @@
 <table> 
   <thead class='header'> 
     <tr> 
-      <%- list_columns.each do |c| -%>
+      <%- @dry_view[:columns].each do |c| -%>
       <th><%= resource_class.human_attribute_name(c.name) -%></th>
       <%- end -%>
       <th class='actions'><%=h I18n.t 'dry_view.actions', :default => "Actions" -%> </th> 
@@ -16,7 +16,7 @@
   <tbody class='items topics'> 
     <% collection.each do |i| %>
       <tr class="<%= cycle("odd", "even") %> <%=h i.class.name -%>" id="<%=h "#{i.class.name}-#{i.id}" -%>">
-        <%- list_columns.each do |c| -%>
+        <%- @dry_view[:columns].each do |c| -%>
         <td class="<%= c.name -%>"><%=h i.send(c.name) %></td>
         <%- end -%>
 
