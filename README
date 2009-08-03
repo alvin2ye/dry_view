@@ -4,7 +4,7 @@ Example:
 
   # Controller
   class BlogController < InheritedResources::Base
-    dry_view
+		dry_view :columns => [:title, :body]
   end
 
 	# Model
