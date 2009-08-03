@@ -1,7 +1,9 @@
-<h1 class='heading'> 
-  <%=h "#{I18n.t('dry_view.new', :default => "New")}#{resource_class.human_name}" -%>
-</h1> 
-<%= render '/shared/form' %>
-<p class='actions'> 
-  <%= link_to I18n.t('dry_view.cancel', :default => 'Cancel'), collection_url %>
-</p> 
+<div class="page">
+  <h1 class='heading'> 
+    <%=h "#{I18n.t('dry_view.new', :default => "New")}#{resource_class.human_name}" -%>
+  </h1> 
+  <%= render '/shared/form' %>
+  <div class='actions'> 
+    <%= link_to I18n.t('dry_view.cancel', :default => 'Cancel'), collection_url %>
+  </p> 
+</div>
