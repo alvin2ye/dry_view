@@ -2,7 +2,13 @@
   <h1 class='heading'> 
     <%=h "#{I18n.t('dry_view.edit', :default => 'Edit')} #{resource_class.human_name} #{resource.label}" -%>
   </h1> 
-  <%= render '/shared/form' %>
+
+  <% if File.exists?(File.join(view_paths.first, controller_name, '_form.html.erb')) %>
+    <%= render 'form' %>
+  <%- else -%>
+    <%= render '/dry_view_default/form' %>
+  <%- end -%>
+
   <div class='actions'> 
     <%= link_to I18n.t('dry_view.cancel', :default => 'Cancel'), collection_url %>
   </div> 

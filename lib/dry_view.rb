@@ -8,37 +8,37 @@ module DryView
       before_filter :set_config
       define_method("index") do
         index! do |format|
-          format.html { render :template => "/shared/index" if !template_exists?  }
+          format.html { render :template => "/dry_view_default/index" if !template_exists?  }
         end
       end
 
       define_method("show") do
         show! do |format|
-          format.html { render :template => "/shared/show" if !template_exists?  }
+          format.html { render :template => "/dry_view_default/show" if !template_exists?  }
         end
       end
 
       define_method("edit") do
         edit! do |format|
-          format.html { render :template => "/shared/edit" if !template_exists?  }
+          format.html { render :template => "/dry_view_default/edit" if !template_exists?  }
         end
       end
 
       define_method("new") do
         new! do |format|
-          format.html { render :template => "/shared/new" if !template_exists?  }
+          format.html { render :template => "/dry_view_default/new" if !template_exists?  }
         end
       end
 
       define_method("update") do
         update! do |success, failure|
-          failure.html { render :template => template_exists? ? "edit" : "/shared/edit" }
+          failure.html { render :template => template_exists? ? "edit" : "/dry_view_default/edit" }
         end
       end
 
       define_method("create") do
         create! do |success, failure|
-          failure.html { render :template => template_exists? ? "new" : "/shared/new" }
+          failure.html { render :template => template_exists? ? "new" : "/dry_view_default/new" }
         end
       end
 

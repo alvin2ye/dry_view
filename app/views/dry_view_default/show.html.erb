@@ -1,7 +1,13 @@
 <div class="page">
-  <h1 class='heading'> 
+  <h1 class="heading"> 
     <%=h "#{I18n.t('dry_view.view', :default => "View")} #{resource_class.human_name} #{resource.label}" -%>
   </h1>
+  
+  <% if File.exists?(File.join(view_paths.first, controller_name, '_heading_actions.html.erb')) %>
+    <div class="heading-actions">
+      <%= render 'heading_actions' %>
+    </div>
+  <%- end -%>
 
   <dl class="<%=h resource_class.name %>" id="<%=h "#{resource_class.name}-#{resource.id}" -%>">
     <%- @dry_view[:columns].each do |c| -%>
