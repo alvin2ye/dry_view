@@ -3,11 +3,15 @@
   <fieldset class="inputs">
     <ol>
       <%- @dry_view[:columns].each do |c| -%>
-      <li class="required">
-        <%= f.label c.name, resource_class.human_attribute_name(c.name) %>
-          <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
-        <%= f.text_field c.name %>
-      </li>
+        <% if File.exists?(File.join(view_paths.first, controller_name, "_#{c.name}_form_column.html.erb")) %>
+          <%= render :partial => "#{c.name}_form_column", :locals  => {:column => c} %>
+        <%- else -%>
+          <li class="required">
+          <%= f.label c.name, resource_class.human_attribute_name(c.name) %>
+            <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
+          <%= f.text_field c.name %>
+          </li>
+        <%- end -%>
       <%- end -%>
     </ol>
   </fieldset> 
