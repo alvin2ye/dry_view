@@ -73,5 +73,6 @@ Example:
 		    <%= render :partial => "#{c.name}_form_column", :locals  => {:column => c} %>
 		 so the file must named like: app/views/books/_name_form_column.html.erb
 
+Issue at http://agideo.lighthouseapp.com/projects/34756-dry_view/overview
 Copyright (c) 2009 Alvin Ye at Agideo, released under the MIT license   
 alvin.ye.cn(*)gmail.com
