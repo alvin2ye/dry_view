@@ -68,5 +68,10 @@ Example:
 			 dry_view :columns => [:name, :code]
 		 end
 
+# Override
+     form 
+		    <%= render :partial => "#{c.name}_form_column", :locals  => {:column => c} %>
+		 so the file must named like: app/views/books/_name_form_column.html.erb
+
 Copyright (c) 2009 Alvin Ye at Agideo, released under the MIT license   
 alvin.ye.cn(*)gmail.com

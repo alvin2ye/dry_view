@@ -44,8 +44,10 @@ module DryView
 
       define_method("set_config") do
         @dry_view = {}
-        if options[:columns]
-          @dry_view[:columns] = resource_class.columns.select { |i| !options[:columns].select{|c| c.to_s == i.name}.empty? } 
+        if options[:columns] && options[:columns].any?
+          @dry_view[:columns] = options[:columns].map do |c| 
+            resource_class.columns.select { |c1| c1.name == c.to_s }[0]
+          end
         else 
           @dry_view[:columns] = resource_class.columns.reject { |i| ["id", "created_at", "updated_at"].include?(i.name) }
         end
