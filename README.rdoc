@@ -19,11 +19,10 @@ class Blog
 	end
 end
 
-== 依赖
+== Required
 
-此功能依赖 inherited_resources( http://github.com/josevalim/inherited_resources/tree/master )
-可以用以下命令安装
 script/plugin install git://github.com/josevalim/inherited_resources.git
+script/plugin install git://github.com/alvin2ye/activerecord_dom_helper.git
 
 == 引用
 

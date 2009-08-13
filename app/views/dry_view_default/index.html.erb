@@ -14,16 +14,16 @@
         <th class='actions'><%=h I18n.t 'dry_view.actions', :default => "Actions" -%> </th> 
       </tr> 
     </thead> 
-    <tbody class='items topics'> 
+    <tbody class="items <%= collection.first.dom_class -%>"> 
       <% if collection.empty? %>
         <tr>
           <td colspan="1000"><%= I18n.t('dry_view.record_not_found', :default => "Record not found.") %></td>
         </tr>
       <% end %>
       <% collection.each do |i| %>
-        <tr class="<%= cycle("odd", "even") %> <%=h i.class.name -%>" id="<%=h "#{i.class.name}-#{i.id}" -%>">
+        <tr class="<%= cycle("odd", "even") %> <%=h i.dom_class -%>" id="<%=h "#{i.dom_id}" -%>">
           <%- @dry_view[:columns].each do |c| -%>
-          <td class="<%= c.name -%>">
+          <td class="<%= c.name.underscore -%>">
             <% me = "#{c.name}_column".gsub(/\?/, '') %>
             <%=respond_to?(me) ? send(me, i): h(i.send(c.name)) %>
           </td>
