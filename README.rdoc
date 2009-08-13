@@ -85,6 +85,11 @@ form
 	<%= render :partial => "#{c.name}_form_column", :locals  => {:column => c} %>
 so the file must named like: app/views/books/_name_form_column.html.erb
 
+app/helpers/books_helper.rb
+
+def name_column(record)
+	" override #{record.name} "
+end
 
 == feedback
 
