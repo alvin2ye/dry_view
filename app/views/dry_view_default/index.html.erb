@@ -29,8 +29,10 @@
           </td>
           <%- end -%>
           <td class="actions">
+             <%- unless @dry_view[:except_show] -%>
              <%= link_to I18n.t('dry_view.view', :default => "View"), resource_url(i) %>
              |
+             <%- end -%>
              <%= link_to I18n.t('dry_view.edit', :default => "Edit"), edit_resource_url(i) %>
              |
              <%= link_to I18n.t('dry_view.remove', :default => "Remove"), resource_url(i), :method => :delete, :confirm => I18n.t('dry_view.are_you_sure', :default => "Are you sure?") %> 

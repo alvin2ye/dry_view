@@ -12,9 +12,11 @@ module DryView
         end
       end
 
-      define_method("show") do
-        show! do |format|
-          format.html { render :template => "/dry_view_default/show" if !template_exists?  }
+      unless options[:except_show]
+        define_method("show") do
+          show! do |format|
+            format.html { render :template => "/dry_view_default/show" if !template_exists?  }
+          end
         end
       end
 
@@ -33,17 +35,19 @@ module DryView
       define_method("update") do
         update! do |success, failure|
           failure.html { render :template => template_exists? ? "edit" : "/dry_view_default/edit" }
+          success.html { redirect_to :action => options[:except_show] ? :index : :show}
         end
       end
 
       define_method("create") do
         create! do |success, failure|
           failure.html { render :template => template_exists? ? "new" : "/dry_view_default/new" }
+          success.html { redirect_to :action => options[:except_show] ? :index : :show}
         end
       end
 
       define_method("set_config") do
-        @dry_view = {}
+        @dry_view = {}.merge(options)
         if options[:columns] && options[:columns].any?
           @dry_view[:columns] = options[:columns].map do |c| 
             resource_class.columns.select { |c1| c1.name == c.to_s }[0]
