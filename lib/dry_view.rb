@@ -35,14 +35,14 @@ module DryView
       define_method("update") do
         update! do |success, failure|
           failure.html { render :template => template_exists? ? "edit" : "/dry_view_default/edit" }
-          success.html { redirect_to :action => options[:except_show] ? :index : :show}
+          success.html { redirect_to options[:except_show] ?  collection_url : resource_url }
         end
       end
 
       define_method("create") do
         create! do |success, failure|
           failure.html { render :template => template_exists? ? "new" : "/dry_view_default/new" }
-          success.html { redirect_to :action => options[:except_show] ? :index : :show}
+          success.html { redirect_to options[:except_show] ?  collection_url : resource_url }
         end
       end
 
