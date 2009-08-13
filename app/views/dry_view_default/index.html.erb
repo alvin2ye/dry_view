@@ -25,7 +25,7 @@
           <%- @dry_view[:columns].each do |c| -%>
           <td class="<%= c.name -%>">
             <% me = "#{c.name}_column".gsub(/\?/, '') %>
-            <%=respond_to?(me) ? send(me, i): h i.send(c.name) %>
+            <%=respond_to?(me) ? send(me, i): h(i.send(c.name)) %>
           </td>
           <%- end -%>
           <td class="actions">

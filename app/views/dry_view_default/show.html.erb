@@ -13,7 +13,7 @@
     <%- @dry_view[:columns].each do |c| -%>
     <dt class='label'><%= resource_class.human_attribute_name(c.name) %></dt> 
     <% me = "#{c.name}_column".gsub(/\?/, '') %>
-    <dd class='<%=h c.name -%>'><%=respond_to?(me) ? send(me, resource) : h resource.send(c.name)%></dd> 
+    <dd class='<%=h c.name -%>'><%=respond_to?(me) ? send(me, resource) : h(resource.send(c.name))%></dd> 
     <%- end -%>
   </dl>
 
@@ -22,4 +22,4 @@
     |
     <%= link_to I18n.t('dry_view.return_index', :default => "Index"), collection_url %>
   </div> 
-</div>
+ </div>
