@@ -12,7 +12,8 @@
   <dl class="<%=h resource_class.name %>" id="<%=h "#{resource_class.name}-#{resource.id}" -%>">
     <%- @dry_view[:columns].each do |c| -%>
     <dt class='label'><%= resource_class.human_attribute_name(c.name) %></dt> 
-    <dd class='<%=h c.name -%>'><%=h resource.send(c.name) %></dd> 
+    <% me = "#{c.name}_column".gsub(/\?/, '') %>
+    <dd class='<%=h c.name -%>'><%=h respond_to?(me) ? send(me, resource): resource.send(c.name)%></dd> 
     <%- end -%>
   </dl>
 

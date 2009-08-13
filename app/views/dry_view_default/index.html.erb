@@ -23,7 +23,10 @@
       <% collection.each do |i| %>
         <tr class="<%= cycle("odd", "even") %> <%=h i.class.name -%>" id="<%=h "#{i.class.name}-#{i.id}" -%>">
           <%- @dry_view[:columns].each do |c| -%>
-          <td class="<%= c.name -%>"><%=h i.send(c.name) %></td>
+          <td class="<%= c.name -%>">
+            <% me = "#{c.name}_column".gsub(/\?/, '') %>
+            <%=h respond_to?(me) ? send(me, i): i.send(c.name) %>
+          </td>
           <%- end -%>
           <td class="actions">
              <%= link_to I18n.t('dry_view.view', :default => "View"), resource_url(i) %>
