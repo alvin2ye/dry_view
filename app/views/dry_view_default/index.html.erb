@@ -15,12 +15,16 @@
       </tr> 
     </thead> 
     <tbody class='items topics'> 
+      <% if collection.empty? %>
+        <tr>
+          <td colspan="1000"><%= I18n.t('dry_view.record_not_found', :default => "Record not found.") %></td>
+        </tr>
+      <% end %>
       <% collection.each do |i| %>
         <tr class="<%= cycle("odd", "even") %> <%=h i.class.name -%>" id="<%=h "#{i.class.name}-#{i.id}" -%>">
           <%- @dry_view[:columns].each do |c| -%>
           <td class="<%= c.name -%>"><%=h i.send(c.name) %></td>
           <%- end -%>
-
           <td class="actions">
              <%= link_to I18n.t('dry_view.view', :default => "View"), resource_url(i) %>
              |
