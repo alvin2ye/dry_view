@@ -9,7 +9,7 @@
     </div>
   <%- end -%>
 
-  <dl class="<%=h resource.dom_class %>" id="<%=h "#{resource_dom.id}" -%>">
+  <dl class="<%=h resource.dom_class %>" id="<%=h "#{resource.dom_id}" -%>">
     <%- @dry_view[:columns].each do |c| -%>
     <dt class='label'><%= resource_class.human_attribute_name(c.name) %></dt> 
     <% me = "#{c.name}_column".gsub(/\?/, '') %>
