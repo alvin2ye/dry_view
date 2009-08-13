@@ -76,20 +76,21 @@ zh:
      
 class CompaniesController < InheritedResources::Base
  # Only display this columns, default is all columns except [:id, :created_at, :updated_at]
- dry_view :columns => [:name, :code]
+ dry_view :columns => [:name, :code], :except_show => true
 end
 
 == Override
 
-form 
+	form 
+
 	<%= render :partial => "#{c.name}_form_column", :locals  => {:column => c} %>
-so the file must named like: app/views/books/_name_form_column.html.erb
+	so the file must named like: app/views/books/_name_form_column.html.erb
 
-app/helpers/books_helper.rb
+	# app/helpers/books_helper.rb
 
-def name_column(record)
-	" override #{record.name} "
-end
+	def name_column(record)
+		" override #{record.name} "
+	end
 
 == feedback
 
