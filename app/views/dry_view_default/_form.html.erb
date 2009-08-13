@@ -4,7 +4,7 @@
     <ol>
       <%- @dry_view[:columns].each do |c| -%>
         <% if File.exists?(File.join(view_paths.first, controller_name, "_#{c.name}_form_column.html.erb")) %>
-          <%= render :partial => "#{c.name}_form_column", :locals  => {:column => c} %>
+          <%= render :partial => "#{c.name}_form_column", :locals  => {:column => c, :f => f} %>
         <%- else -%>
           <li class="required">
           <%= f.label c.name, resource_class.human_attribute_name(c.name) %>
