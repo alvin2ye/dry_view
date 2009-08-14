@@ -14,7 +14,7 @@
         <th class='actions'><%=h I18n.t 'dry_view.actions', :default => "Actions" -%> </th> 
       </tr> 
     </thead> 
-    <tbody class="items <%= collection.first.dom_class -%>"> 
+    <tbody class="<%=h resource_class.new.dom_class -%>"> 
       <% if collection.empty? %>
         <tr>
           <td colspan="1000"><%= I18n.t('dry_view.record_not_found', :default => "Record not found.") %></td>
