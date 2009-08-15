@@ -2,14 +2,14 @@
   <%= f.error_messages %>
   <fieldset class="inputs">
     <ol>
-      <%- @dry_view[:columns].each do |c| -%>
-        <% if File.exists?(File.join(view_paths.first, controller_name, "_#{c.name}_form_column.html.erb")) %>
-          <%= render :partial => "#{c.name}_form_column", :locals  => {:column => c, :f => f} %>
+      <%- (params[:actions].to_s == "new" ? @dry_view.create_columns : @dry_view.update_columns).each do |c| -%>
+        <% if File.exists?(File.join(view_paths.first, controller_name, "_#{c}_form_column.html.erb")) %>
+          <%= render :partial => "#{c}_form_column", :locals  => {:column => c, :f => f} %>
         <%- else -%>
           <li class="required">
-          <%= f.label c.name, resource_class.human_attribute_name(c.name) %>
+          <%= f.label c, resource_class.human_attribute_name(c.to_s) %>
             <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
-          <%= f.text_field c.name %>
+          <%= f.text_field c %>
           </li>
         <%- end -%>
       <%- end -%>

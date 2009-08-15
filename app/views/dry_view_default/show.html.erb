@@ -10,10 +10,10 @@
   <%- end -%>
 
   <dl class="<%=h resource.dom_class %>" id="<%=h "#{resource.dom_id}" -%>">
-    <%- @dry_view[:columns].each do |c| -%>
-    <dt class='label'><%= resource_class.human_attribute_name(c.name) %></dt> 
-    <% me = "#{c.name}_column".gsub(/\?/, '') %>
-    <dd class='<%=h c.name.underscore -%>'><%=respond_to?(me) ? send(me, resource) : h(resource.send(c.name))%></dd> 
+    <%- @dry_view.show_columns.each do |c| -%>
+    <dt class='label'><%= resource_class.human_attribute_name(c.to_s) %></dt> 
+    <% me = "#{c}_column".gsub(/\?/, '') %>
+    <dd class='<%=h c.to_s.underscore -%>'><%=respond_to?(me) ? send(me, resource) : h(resource.send(c))%></dd> 
     <%- end -%>
   </dl>
 

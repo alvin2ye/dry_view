@@ -8,8 +8,8 @@
   <table> 
     <thead class='header'> 
       <tr> 
-        <%- @dry_view[:columns].each do |c| -%>
-        <th><%= resource_class.human_attribute_name(c.name) -%></th>
+        <%- @dry_view.list_columns.each do |c| -%>
+        <th><%= resource_class.human_attribute_name(c.to_s) -%></th>
         <%- end -%>
         <th class='actions'><%=h I18n.t 'dry_view.actions', :default => "Actions" -%> </th> 
       </tr> 
@@ -22,20 +22,20 @@
       <% end %>
       <% collection.each do |i| %>
         <tr class="<%= cycle("odd", "even") %> <%=h i.dom_class -%>" id="<%=h "#{i.dom_id}" -%>">
-          <%- @dry_view[:columns].each do |c| -%>
-          <td class="<%= c.name.underscore -%>">
-            <% me = "#{c.name}_column".gsub(/\?/, '') %>
-            <%=respond_to?(me) ? send(me, i): h(i.send(c.name)) %>
+          <%- @dry_view.list_columns.each do |c| -%>
+          <td class="<%= c.to_s.underscore -%>">
+            <% me = "#{c}_column".gsub(/\?/, '') %>
+            <%= respond_to?(me) ? send(me, i): h(i.send(c)) %>
           </td>
           <%- end -%>
           <td class="actions">
-             <%- unless @dry_view[:except_show] -%>
-             <%= link_to I18n.t('dry_view.view', :default => "View"), resource_url(i) %>
-             |
-             <%- end -%>
-             <%= link_to I18n.t('dry_view.edit', :default => "Edit"), edit_resource_url(i) %>
-             |
-             <%= link_to I18n.t('dry_view.remove', :default => "Remove"), resource_url(i), :method => :delete, :confirm => I18n.t('dry_view.are_you_sure', :default => "Are you sure?") %> 
+             <%-
+             links = []
+             links << link_to(I18n.t('dry_view.view', :default => "View"), resource_url(i)) if @dry_view.has_show?
+             links << link_to(I18n.t('dry_view.edit', :default => "Edit"), edit_resource_url(i)) if @dry_view.has_edit?
+             links << link_to(I18n.t('dry_view.remove', :default => "Remove"), resource_url(i), :method => :delete, :confirm => I18n.t('dry_view.are_you_sure', :default => "Are you sure?")) if @dry_view.has_destroy?
+             -%>
+             <%= links.join(' | ') %>
           </td>
         </tr>
       <% end %>

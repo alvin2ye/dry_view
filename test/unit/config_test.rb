@@ -26,9 +26,19 @@ class ConfigTest < Test::Unit::TestCase
   end
 
   def test_actions
-    assert_equal [:index, :show, :update, :new, :create, :destroy], @default.actions
+    assert_equal [:index, :show, :update, :new, :create, :destroy, :edit], @default.actions
     assert_equal [:index, :new], @sample.actions
-    assert_equal [:index, :update, :new, :create, :destroy], DryView::Config.new(Person, :except_show => true ).actions
+    assert_equal [:index, :update, :new, :create, :destroy, :edit], DryView::Config.new(Person, :except_show => true ).actions
+  end
+
+  def test_has_methods
+    assert @default.has_show?
+    assert @default.has_edit?
+    assert @default.has_destroy?
+
+    assert !@sample.has_show?
+    assert !@sample.has_edit?
+    assert !@sample.has_destroy?
   end
 
   def test_list_columns

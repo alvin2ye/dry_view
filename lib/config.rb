@@ -17,7 +17,7 @@ module DryView
       if options[:actions].is_a?(Array)
         @actions = options[:actions] 
       else
-        @actions = [:index, :show, :update, :new, :create, :destroy]
+        @actions = [:index, :show, :update, :new, :create, :destroy, :edit]
         @actions -= [:show] if options[:except_show]
       end
 
@@ -57,6 +57,18 @@ module DryView
 
     def show_except_column 
       (self.show && self.show[:except_columns]) ?  self.show[:except_columns] : []
+    end
+
+    def has_show?
+      self.actions.include?(:show)
+    end
+
+    def has_edit?
+      self.actions.include?(:edit)
+    end
+
+    def has_destroy?
+      self.actions.include?(:destroy)
     end
   end
 end
