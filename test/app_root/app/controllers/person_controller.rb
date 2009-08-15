@@ -1,2 +1,3 @@
-class PersonController < ApplicationController
+class PersonController < InheritedResources::Base
+  dry_view
 end
