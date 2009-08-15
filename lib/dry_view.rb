@@ -1,3 +1,4 @@
+require 'inherited_resources'
 module DryView
   def self.included(base)
     base.extend(ClassMethods)
