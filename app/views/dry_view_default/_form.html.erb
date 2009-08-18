@@ -7,9 +7,21 @@
           <%= render :partial => "#{c}_form_column", :locals  => {:column => c, :f => f} %>
         <%- else -%>
           <li class="required">
-          <%= f.label c, resource_class.human_attribute_name(c.to_s) %>
+            <%= f.label c, resource_class.human_attribute_name(c.to_s) %>
             <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
-          <%= f.text_field c %>
+          <%- db_column = resource_class.columns.select{ |col| col.name.to_s == c.to_s }.first -%>
+          <%- case db_column.try(:type) -%>
+          <%- when :date -%>
+            <%= f.date_select c -%>
+          <%- when :datetime -%>
+            <%= f.datetime_select c -%>
+          <%- when :text -%>
+            <%= f.text_area c -%>
+          <%- when :boolean -%>
+            <%= f.select c, [[I18n.t("dry_view.boolean_text.ture", :default => "Yes"), 1], [I18n.t("dry_view.boolean_text.false", :default => "No"), 0]] %>
+          <%- else -%>
+            <%= f.text_field c %>
+          <%- end -%>
           </li>
         <%- end -%>
       <%- end -%>
