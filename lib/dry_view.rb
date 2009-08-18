@@ -51,6 +51,11 @@ module DryView
       define_method("set_config") do
         @dry_view = Config.new(resource_class, options)
       end
+
+      protected
+        define_method("collection") do
+          get_collection_ivar || set_collection_ivar(end_of_association_chain.paginate(:all, :page => params[:page], :per_page => @dry_view.list[:pre_page] || 20))
+        end
     end
   end
 end

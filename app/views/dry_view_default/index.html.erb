@@ -41,4 +41,5 @@
       <% end %>
     </tbody> 
   </table> 
+  <%= will_paginate(collection, :previous_label => I18n.t("dry_view.paginate.previous", :default => 'Previous'), :next_label => I18n.t("dry_view.paginate.next", :default => 'Next')) %>
 </div>

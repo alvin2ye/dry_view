@@ -21,7 +21,7 @@ module DryView
         @actions -= [:show] if options[:except_show]
       end
 
-      @list = options[:list]
+      @list = options[:list] || {}
       @create = options[:create]
       @update = options[:update]
       @show = options[:show]
@@ -44,7 +44,7 @@ module DryView
     end
 
     def list_except_column 
-      (self.list && self.list[:except_columns]) ?  self.list[:except_columns] : []
+      self.list[:except_columns] ?  self.list[:except_columns] : []
     end
 
     def create_except_column 
