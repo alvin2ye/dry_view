@@ -54,7 +54,7 @@ module DryView
 
       protected
         define_method("collection") do
-          get_collection_ivar || set_collection_ivar(end_of_association_chain.paginate(:all, :page => params[:page], :per_page => @dry_view.list[:pre_page] || 20))
+          get_collection_ivar || set_collection_ivar(end_of_association_chain.paginate(:all, :page => params[:page], :per_page => @dry_view.list[:pre_page] || 50))
         end
     end
   end
