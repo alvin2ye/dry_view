@@ -59,6 +59,14 @@ module DryView
       (self.show && self.show[:except_columns]) ?  self.show[:except_columns] : []
     end
 
+    def has_record_action?
+      has_show? || has_edit? || has_destroy?
+    end
+
+    def has_new?
+      self.actions.include?(:new)
+    end
+
     def has_show?
       self.actions.include?(:show)
     end

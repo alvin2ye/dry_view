@@ -3,7 +3,9 @@
     <%= resource_class.human_name -%>
   </h1> 
   <div class='actions'> 
+    <%- if @dry_view.has_new? -%>
     <%= link_to "#{I18n.t('dry_view.new', :default => "New")}#{resource_class.human_name}", new_resource_url %>
+    <%- end -%>
   </div> 
   <table cellspacing="0" cellpadding="0" border="0"> 
     <thead class='header'> 
@@ -11,7 +13,9 @@
         <%- @dry_view.list_columns.each do |c| -%>
         <th><%= resource_class.human_attribute_name(c.to_s) -%></th>
         <%- end -%>
+        <%- if @dry_view.has_record_action? -%>
         <th class='actions'><%=h I18n.t 'dry_view.actions', :default => "Actions" -%> </th> 
+        <%- end -%>
       </tr> 
     </thead> 
     <tbody class="<%=h resource_class.new.dom_class -%>"> 
@@ -28,6 +32,7 @@
             <%= respond_to?(me) ? send(me, i): h(i.send(c)) %>
           </td>
           <%- end -%>
+          <%- if @dry_view.has_record_action? -%>
           <td class="actions">
              <%-
              links = []
@@ -37,6 +42,7 @@
              -%>
              <%= links.join(' | ') %>
           </td>
+          <%- end -%>
         </tr>
       <% end %>
     </tbody> 

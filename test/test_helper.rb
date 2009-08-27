@@ -33,3 +33,7 @@ require 'inherited_resources/base'
 
 require '../activerecord_dom_helper/lib/activerecord_dom_helper'
 require '../activerecord_dom_helper/init'
+
+gem 'mislav-will_paginate'
+require 'will_paginate'
+
