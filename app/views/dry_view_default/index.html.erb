@@ -20,8 +20,10 @@
     </thead> 
     <tbody class="<%=h resource_class.new.dom_class -%>"> 
       <% if collection.empty? %>
+        <% colspan_count = @dry_view.list_columns.size -%>
+        <% colspan_count += 1 if @dry_view.has_record_action? -%>
         <tr>
-          <td colspan="1000"><%= I18n.t('dry_view.record_not_found', :default => "Record not found.") %></td>
+          <td colspan="<%= colspan_count -%>"><%= I18n.t('dry_view.record_not_found', :default => "Record not found.") %></td>
         </tr>
       <% end %>
       <% collection.each do |i| %>
