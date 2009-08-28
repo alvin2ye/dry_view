@@ -2,9 +2,9 @@ module DryView
   class Config
     IGNORE = ["id", "created_at", "updated_at"]
 
-    attr_accessor :columns, :list, :create, :update, :show, :actions
+    attr_accessor :columns, :list, :create, :update, :show, :actions, :requires
     attr :resource_class, :except_show
-    
+
     def initialize(resource_class, options = {})
       @resource_class = resource_class
 
@@ -25,6 +25,7 @@ module DryView
       @create = options[:create]
       @update = options[:update]
       @show = options[:show]
+      @requires = options[:requires]
     end
 
     def list_columns
@@ -47,16 +48,36 @@ module DryView
       self.list[:except_columns] ?  self.list[:except_columns] : []
     end
 
-    def create_except_column 
+    def requires
+      @requires || self.columns
+    end
+
+    def create_requires
+      self.requires - create_except_requires
+    end
+
+    def update_requires
+      self.requires - update_except_requires
+    end
+
+    def create_except_column
       (self.create && self.create[:except_columns]) ?  self.create[:except_columns] : []
     end
 
-    def update_except_column 
+    def update_except_column
       (self.update && self.update[:except_columns]) ?  self.update[:except_columns] : []
     end
 
-    def show_except_column 
+    def show_except_column
       (self.show && self.show[:except_columns]) ?  self.show[:except_columns] : []
+    end
+
+    def create_except_requires
+      (self.create && self.create[:except_requires]) ? self.create[:except_requires] : []
+    end
+
+    def update_except_requires
+      (self.update && self.update[:except_requires]) ? self.update[:except_requires] : []
     end
 
     def has_record_action?

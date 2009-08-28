@@ -8,9 +8,10 @@ class ConfigTest < Test::Unit::TestCase
         :columns => [:id, :name, :created_at],
         :actions => [:index],
         :list => {:except_columns => [:created_at]},
-        :create => {:except_columns => [:id, :created_at]},
-        :update => {:except_columns => [:created_at]},
-        :show => {:except_columns => [:id]}
+        :create => {:except_columns => [:id, :created_at], :except_requires => [:id]},
+        :update => {:except_columns => [:created_at], :except_requires => [:name]},
+        :show => {:except_columns => [:id]},
+        :requires => [:id, :name]
       }
     )
 
@@ -63,5 +64,22 @@ class ConfigTest < Test::Unit::TestCase
   def test_show_columns
     assert_equal [:name, :email, :age, :birthday], @default.show_columns
     assert_equal [:name, :created_at], @sample.show_columns
+  end
+
+  def test_requires
+    assert_equal [:id, :name], @sample.requires
+  end
+
+  def test_requires_default
+    @sample.requires = nil
+    assert_equal [:id, :name, :created_at], @sample.requires
+  end
+
+  def test_create_requires
+    assert_equal [:name], @sample.create_requires
+  end
+
+  def test_update_requires
+    assert_equal [:id], @sample.update_requires
   end
 end

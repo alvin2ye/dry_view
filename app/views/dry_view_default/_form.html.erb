@@ -2,13 +2,16 @@
   <%= f.error_messages %>
   <fieldset class="inputs">
     <ol>
+      <%- requires = (params[:actions].to_s == "new" ? @dry_view.create_requires : @dry_view.update_requires) -%>
       <%- (params[:actions].to_s == "new" ? @dry_view.create_columns : @dry_view.update_columns).each do |c| -%>
         <% if File.exists?(File.join(view_paths.first, controller_name, "_#{c}_form_column.html.erb")) %>
           <%= render :partial => "#{c}_form_column", :locals  => {:column => c, :f => f} %>
         <%- else -%>
-          <li class="required">
+          <li<%= ' class="required"' if requires.include?(c) -%>>
             <%= f.label c, resource_class.human_attribute_name(c.to_s) %>
+            <%- if requires.include?(c) -%>
             <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
+            <%- end -%>
           <%- db_column = resource_class.columns.select{ |col| col.name.to_s == c.to_s }.first -%>
           <%- case db_column.try(:type) -%>
           <%- when :date -%>
