@@ -78,6 +78,20 @@ class CompaniesController < InheritedResources::Base
  dry_view :columns => [:name, :code], :except_show => true
 end
 
+class Company < ActiveRecord::Base
+  def allow_show?
+    ...
+  end
+
+  def allow_edit?
+    ...
+  end
+
+  def allow_destroy?
+    ...
+  end
+end
+
 == Override
 
 	form 
