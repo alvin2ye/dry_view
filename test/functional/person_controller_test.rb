@@ -13,6 +13,20 @@ class PersonControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_tag :tag => "h1", :attributes => {:class => "heading"}
+  end
+
+  test 'have record actions' do
+    get :index
     assert_tag :tag => "a", :content => "View"
+    assert_tag :tag => "a", :content => "Edit"
+    assert_tag :tag => "a", :content => "Remove"
+  end
+
+  test 'have not record actions' do
+    @alvin.update_attributes(:age => 200)
+    get :index
+    assert_no_tag :tag => "a", :content => "View"
+    assert_no_tag :tag => "a", :content => "Edit"
+    assert_no_tag :tag => "a", :content => "Remove"
   end
 end
