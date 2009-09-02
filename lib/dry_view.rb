@@ -8,6 +8,8 @@ module DryView
   module ClassMethods
     def dry_view(options = {})
       before_filter :set_config
+      before_filter :set_dry_view_config
+
       define_method("index") do
         index! do |format|
           format.html { render :template => "/dry_view_default/index" if !template_exists?  }
@@ -50,6 +52,9 @@ module DryView
 
       define_method("set_config") do
         @dry_view = Config.new(resource_class, options)
+      end
+
+      define_method("set_dry_view_config") do
       end
 
       protected
