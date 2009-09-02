@@ -74,8 +74,12 @@ zh:
 == Config
      
 class CompaniesController < InheritedResources::Base
- # Only display this columns, default is all columns except [:id, :created_at, :updated_at]
- dry_view :columns => [:name, :code], :except_show => true
+  # Only display this columns, default is all columns except [:id, :created_at, :updated_at]
+  dry_view :columns => [:name, :code], :except_show => true
+ 
+  def set_dry_view_config
+    # You can set @dry_view here
+  end
 end
 
 class Company < ActiveRecord::Base
