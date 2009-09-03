@@ -9,6 +9,7 @@ module DryView
     def dry_view(options = {})
       before_filter :set_config
       before_filter :set_dry_view_config
+      before_filter :authorize_action
 
       define_method("index") do
         index! do |format|
@@ -55,6 +56,10 @@ module DryView
       end
 
       define_method("set_dry_view_config") do
+      end
+
+      define_method("authorize_action") do
+        raise "no permission" unless @dry_view.actions.any?{ |action| action.to_s == params[:action] }
       end
 
       protected

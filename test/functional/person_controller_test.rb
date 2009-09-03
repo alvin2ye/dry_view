@@ -6,7 +6,7 @@ class PersonControllerTest < ActionController::TestCase
     @request     = ActionController::TestRequest.new
     @response    = ActionController::TestResponse.new
 
-    @alvin = Person.create!(:name => "alvin", :email => "alvin.ye.cn@gmail.com", :age => "27", :birthday => "1983-01-01")
+    @no_permission = Person.create!(:name => "alvin", :email => "alvin.ye.cn@gmail.com", :age => "27", :birthday => "1983-01-01")
   end
 
   test "index" do
@@ -23,7 +23,7 @@ class PersonControllerTest < ActionController::TestCase
   end
 
   test 'have not record actions' do
-    @alvin.update_attributes(:age => 200)
+    @no_permission.update_attributes(:age => 200)
     get :index
     assert_no_tag :tag => "a", :content => "View"
     assert_no_tag :tag => "a", :content => "Edit"
@@ -31,13 +31,24 @@ class PersonControllerTest < ActionController::TestCase
   end
 
   test 'remove new action in set_dry_view_config ' do
-    @alvin.update_attributes(:age => 200)
-    get :index, :user => "alvin"
+    @no_permission.update_attributes(:age => 200)
+    get :index, :user => "no_permission"
     assert_no_tag :tag => "a", :content => "NewPerson"
   end
 
   test 'has_new action ' do
     get :index
     assert_tag :tag => "a", :content => "NewPerson"
+  end
+
+  test 'create' do
+    post :create
+    assert_redirected_to "http://test.host/people/2"
+  end
+
+  test 'no permission create' do
+    assert_raise(RuntimeError) do 
+      post :create, :user => "no_permission"
+    end
   end
 end
