@@ -1,3 +1,3 @@
 ActiveSupport::Inflector.inflections do |inflect|
-  inflect.irregular 'person', 'person'
+  inflect.irregular 'person', 'people'
 end

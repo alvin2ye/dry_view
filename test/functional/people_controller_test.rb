@@ -1,8 +1,8 @@
 require 'test_helper'
 
-class PersonControllerTest < ActionController::TestCase
+class PeopleControllerTest < ActionController::TestCase
   def setup
-    @controller  = PersonController.new
+    @controller  = PeopleController.new
     @request     = ActionController::TestRequest.new
     @response    = ActionController::TestResponse.new
 
@@ -33,17 +33,17 @@ class PersonControllerTest < ActionController::TestCase
   test 'remove new action in set_dry_view_config ' do
     @no_permission.update_attributes(:age => 200)
     get :index, :user => "no_permission"
-    assert_no_tag :tag => "a", :content => "NewPerson"
+    assert_no_tag :tag => "a", :content => "Newpeople"
   end
 
   test 'has_new action ' do
     get :index
-    assert_tag :tag => "a", :attributes => { :href => 'http://test.host/person/new' }
+    assert_tag :tag => "a", :attributes => { :href => 'http://test.host/people/new' }
   end
 
   test 'create' do
     post :create
-    assert_redirected_to "http://test.host/person/2"
+    assert_redirected_to "http://test.host/people/2"
   end
 
   test 'no permission create' do
@@ -62,13 +62,10 @@ class PersonControllerTest < ActionController::TestCase
     assert_human_name
   end
 
-  # TODO fix new test
-=begin
   test 'new with human name' do
     get :new
     assert_human_name
   end
-=end
 
   test 'edit with human name' do
     get :edit, :id => Person.first.id

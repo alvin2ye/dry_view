@@ -1,4 +1,4 @@
-class PersonController < InheritedResources::Base
+class PeopleController < InheritedResources::Base
   dry_view
 
   def set_dry_view_config

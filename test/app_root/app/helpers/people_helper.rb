@@ -1,4 +1,4 @@
-module PersonHelper
+module PeopleHelper
   def human_name
     'custom human name'
   end

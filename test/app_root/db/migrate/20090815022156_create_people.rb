@@ -1,6 +1,6 @@
-class CreatePerson < ActiveRecord::Migration
+class CreatePeople < ActiveRecord::Migration
   def self.up
-    create_table :person do |t|
+    create_table :people do |t|
       t.string :name
       t.string :email
       t.integer :age
