@@ -32,7 +32,12 @@ class PersonControllerTest < ActionController::TestCase
 
   test 'remove new action in set_dry_view_config ' do
     @alvin.update_attributes(:age => 200)
-    get :index
+    get :index, :user => "alvin"
     assert_no_tag :tag => "a", :content => "NewPerson"
+  end
+
+  test 'has_new action ' do
+    get :index
+    assert_tag :tag => "a", :content => "NewPerson"
   end
 end
