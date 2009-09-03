@@ -51,4 +51,9 @@ class PersonControllerTest < ActionController::TestCase
       post :create, :user => "no_permission"
     end
   end
+
+  test 'allow customer action' do
+    get :customer_action
+    assert_response :success
+  end
 end

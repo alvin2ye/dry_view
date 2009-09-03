@@ -59,7 +59,12 @@ module DryView
       end
 
       define_method("authorize_action") do
-        raise "no permission" unless @dry_view.actions.any?{ |action| action.to_s == params[:action] }
+        default_action = [:new, :create, :edit, :update, :list, :show, :destroy]
+        if default_action.any?{ |act| act.to_s == params[:action]}
+          unless @dry_view.actions.any?{ |action| action.to_s == params[:action] }
+            raise "no permission"
+          end
+        end
       end
 
       protected
