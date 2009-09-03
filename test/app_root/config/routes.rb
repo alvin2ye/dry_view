@@ -1,5 +1,3 @@
 ActionController::Routing::Routes.draw do |map|
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
-  map.resources :people
+  map.resources :person, :collection => { :customer_action => :get }
 end

@@ -1,6 +1,7 @@
+<% human_name = (respond_to?(:human_name) ? send(:human_name) : resource_class.human_name) %>
 <div class="page">
   <h1 class="heading"> 
-    <%=h "#{I18n.t('dry_view.view', :default => "View")} #{resource_class.human_name} #{resource.label}" -%>
+    <%=h "#{I18n.t('dry_view.view', :default => "View")} #{human_name} #{resource.label}" -%>
   </h1>
   
   <% if File.exists?(File.join(view_paths.first, controller_name, '_heading_actions.html.erb')) %>

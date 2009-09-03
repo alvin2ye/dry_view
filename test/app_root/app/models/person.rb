@@ -1,4 +1,8 @@
 class Person < ActiveRecord::Base
+  def label
+    self.name
+  end
+
   def allow_show?
     self.age < 200
   end

@@ -38,12 +38,12 @@ class PersonControllerTest < ActionController::TestCase
 
   test 'has_new action ' do
     get :index
-    assert_tag :tag => "a", :content => "NewPerson"
+    assert_tag :tag => "a", :attributes => { :href => 'http://test.host/person/new' }
   end
 
   test 'create' do
     post :create
-    assert_redirected_to "http://test.host/people/2"
+    assert_redirected_to "http://test.host/person/2"
   end
 
   test 'no permission create' do
@@ -56,4 +56,33 @@ class PersonControllerTest < ActionController::TestCase
     get :customer_action
     assert_response :success
   end
+
+  test 'index with human name' do
+    get :index
+    assert_human_name
+  end
+
+  # TODO fix new test
+=begin
+  test 'new with human name' do
+    get :new
+    assert_human_name
+  end
+=end
+
+  test 'edit with human name' do
+    get :edit, :id => Person.first.id
+    assert_human_name
+  end
+
+  test 'show with human name' do
+    get :show, :id => Person.first.id
+    assert_human_name
+  end
+
+  private
+
+     def assert_human_name
+       assert_tag :tag => "h1", :attributes => {:class => "heading"}, :content => /custom human name/
+     end
 end
