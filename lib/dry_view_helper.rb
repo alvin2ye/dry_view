@@ -1,2 +1,5 @@
 module DryViewHelper
-end   
+  def human_name
+    resource_class.human_name
+  end
+end
