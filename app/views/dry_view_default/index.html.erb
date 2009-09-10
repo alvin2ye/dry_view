@@ -18,7 +18,7 @@
         <%- end -%>
       </tr> 
     </thead> 
-    <tbody class="<%=h resource_class.new.dom_class -%>"> 
+    <tbody class="items <%=h resource_class.new.dom_class -%>"> 
       <% if collection.empty? %>
         <% colspan_count = @dry_view.list_columns.size -%>
         <% colspan_count += 1 if @dry_view.has_record_action? -%>
