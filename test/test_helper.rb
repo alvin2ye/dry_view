@@ -33,7 +33,17 @@ require 'inherited_resources/base'
 
 require '../activerecord_dom_helper/lib/activerecord_dom_helper'
 require '../activerecord_dom_helper/init'
-
 gem 'mislav-will_paginate'
 require 'will_paginate'
 
+def assert_security_error
+  assert_raise(SecurityError) { yield }
+end
+
+def assert_no_permission_error
+  assert_raise(NoPermissionError) { yield }
+end
+
+def assert_record_not_found
+  assert_raise(ActiveRecord::RecordNotFound) { yield }
+end
