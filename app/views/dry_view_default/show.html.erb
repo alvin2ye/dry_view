@@ -19,8 +19,12 @@
   </dl>
 
   <div class='actions'> 
-    <%= link_to I18n.t('dry_view.edit', :default => "Edit"), edit_resource_url %>
-    |
-    <%= link_to I18n.t('dry_view.return_index', :default => "Index"), collection_url %>
+    <%-
+    links = []
+    links << link_to(I18n.t('dry_view.edit', :default => "Edit"), edit_resource_url(resource)) if (resource.respond_to?('allow_edit?') ? resource.allow_edit? : @dry_view.has_edit?)
+    links << link_to(I18n.t('dry_view.remove', :default => "Remove"), resource_url(resource), :method => :delete, :confirm => I18n.t('dry_view.are_you_sure', :default => "Are you sure?")) if (resource.respond_to?('allow_destroy?') ? resource.allow_destroy? : @dry_view.has_destroy?)
+    links << link_to(I18n.t('dry_view.return_index', :default => "List"), collection_url)
+    -%>
+    <%= links.join(' | ') %>
   </div> 
  </div>
