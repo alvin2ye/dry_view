@@ -37,11 +37,7 @@ gem 'mislav-will_paginate'
 require 'will_paginate'
 
 def assert_security_error
-  assert_raise(SecurityError) { yield }
-end
-
-def assert_no_permission_error
-  assert_raise(NoPermissionError) { yield }
+  assert_raise(DryView::SecurityError) { yield }
 end
 
 def assert_record_not_found

@@ -42,7 +42,7 @@ class PeopleControllerTest < ActionController::TestCase
   end
 
   test 'no permission create' do
-    assert_raise(RuntimeError) do 
+    assert_raise(DryView::SecurityError) do 
       post :create, :user => "no_permission"
     end
   end

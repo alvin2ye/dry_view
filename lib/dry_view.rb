@@ -1,5 +1,7 @@
 require 'inherited_resources'
 require 'config'
+require 'security_error'
+
 module DryView
   def self.included(base)
     base.extend(ClassMethods)
@@ -40,7 +42,7 @@ module DryView
       end
 
       define_method("update") do
-        raise SecurityError if resource.respond_to?('allow_edit?') && !resource.allow_edit?
+        raise DryView::SecurityError if resource.respond_to?('allow_edit?') && !resource.allow_edit?
         update! do |success, failure|
           failure.html { render :template => template_exists? ? "edit" : "/dry_view_default/edit" }
           success.html { redirect_to options[:except_show] ?  collection_url : resource_url }
@@ -55,7 +57,7 @@ module DryView
       end
 
       define_method("destroy") do
-        raise SecurityError if resource.respond_to?('allow_destroy?') && !resource.allow_destroy?
+        raise DryView::SecurityError if resource.respond_to?('allow_destroy?') && !resource.allow_destroy?
         destroy! do |format|
           format.html{ redirect_to collection_url}
         end
@@ -72,7 +74,7 @@ module DryView
         default_action = [:new, :create, :edit, :update, :list, :show, :destroy]
         if default_action.any?{ |act| act.to_s == params[:action]}
           unless @dry_view.actions.any?{ |action| action.to_s == params[:action] }
-            raise "no permission"
+            raise DryView::SecurityError
           end
         end
       end
