@@ -11,6 +11,8 @@
             <%= f.label c, resource_class.human_attribute_name(c.to_s) %>
             <%- if requires.include?(c) -%>
             <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
+            <%- else -%>
+            <abbr class="hidden">*</abbr>
             <%- end -%>
           <%- db_column = resource_class.columns.select{ |col| col.name.to_s == c.to_s }.first -%>
           <%- case db_column.try(:type) -%>
@@ -34,7 +36,7 @@
     <ol>
       <li class="commit">
         <%= f.submit I18n.t('dry_view.submit', :default => "Submit") %>
-      </li> 
+      </li>
     </ol>
   </fieldset>
 <% end %>
