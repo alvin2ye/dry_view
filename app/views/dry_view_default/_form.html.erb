@@ -21,7 +21,7 @@
           <%- when :text -%>
             <%= f.text_area c -%>
           <%- when :boolean -%>
-            <%= f.select c, [[I18n.t("dry_view.boolean_text.ture", :default => "Yes"), 1], [I18n.t("dry_view.boolean_text.false", :default => "No"), 0]] %>
+            <%= f.select c, [[I18n.t("dry_view.boolean_text.true", :default => "Yes"), 1], [I18n.t("dry_view.boolean_text.false", :default => "No"), 0]] %>
           <%- else -%>
             <%= f.text_field c %>
           <%- end -%>
