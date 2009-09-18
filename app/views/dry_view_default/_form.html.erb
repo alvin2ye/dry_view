@@ -2,7 +2,6 @@
   <%= f.error_messages %>
   <fieldset class="inputs">
     <ol>
-      <%- requires = (params[:actions].to_s == "new" ? @dry_view.create_requires : @dry_view.update_requires) -%>
       <%- (params[:actions].to_s == "new" ? @dry_view.create_columns : @dry_view.update_columns).each do |c| -%>
         <% if File.exists?(File.join(view_paths.first, controller_name, "_#{c}_form_column.html.erb")) %>
           <%= render :partial => "#{c}_form_column", :locals  => {:column => c, :f => f} %>
