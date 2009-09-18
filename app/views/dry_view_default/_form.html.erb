@@ -8,12 +8,7 @@
           <%= render :partial => "#{c}_form_column", :locals  => {:column => c, :f => f} %>
         <%- else -%>
           <li<%= ' class="required"' if requires.include?(c) -%>>
-            <%= f.label c, resource_class.human_attribute_name(c.to_s) %>
-            <%- if requires.include?(c) -%>
-            <abbr title="<%=h I18n.t('dry_view.required', :default => "Required") -%>">*</abbr>
-            <%- else -%>
-            <abbr class="hidden">*</abbr>
-            <%- end -%>
+            <%= f.label c, label_text(c) %>
           <%- db_column = resource_class.columns.select{ |col| col.name.to_s == c.to_s }.first -%>
           <%- case db_column.try(:type) -%>
           <%- when :date -%>
