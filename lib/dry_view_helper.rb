@@ -3,8 +3,9 @@ module DryViewHelper
     params[:actions].to_s == "new" ? @dry_view.create_requires : @dry_view.update_requires
   end
 
-  def label_text(c)
-    req_str = (requires.include?(c) ? abbr_tag("*", :title => I18n.t('dry_view.required', :default => "Required")) : nil)
+  def label_text(c, options = {})
+    required = options[:required] || requires.include?(c)
+    req_str = (required ? abbr_tag("*", :title => I18n.t('dry_view.required', :default => "Required")) : nil)
     [resource_class.human_attribute_name(c.to_s), req_str].compact.join(' ')
   end
 
