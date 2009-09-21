@@ -17,11 +17,11 @@ module DryViewHelper
     cls = options[:class]
     cls = [cls, "abbr"].compact.uniq.join(" ")
     content_tag(:abbr, options) do
-      ie? ? content_tag(:span, cnt, options.merge(:class => cls)) : cnt
+      ie6? ? content_tag(:span, cnt, options.merge(:class => cls)) : cnt
     end
   end
 
-  def ie?
+  def ie6?
     request.env['HTTP_USER_AGENT'].to_s.downcase.match("msie 6")
   end
 end
